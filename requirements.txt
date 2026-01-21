@@ -1,6 +1,3 @@
 flask
 requests
-
-'c1e17822e800e0bf45c4560fc10fb2b2'
-
-f"http://api.openweathermap.org/data/2.5/weather?q={user_input}&units=imperial&APPID={api_key}")
+gunicorn 

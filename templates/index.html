@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather App</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 12px;
+            width: 360px;
+            text-align: center;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        input {
+            border: 1px solid #ccc;
+        }
+
+        button {
+            border: none;
+            background: #4facfe;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1e90ff;
+        }
+
+        .loader {
+            display: none;
+            margin: 15px auto;
+            width: 30px;
+            height: 30px;
+            border: 4px solid #ddd;
+            border-top: 4px solid #4facfe;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        .result {
+            margin-top: 15px;
+            background: #f4f9ff;
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+
+    <script>
+        function showLoader() {
+            document.getElementById("loader").style.display = "block";
+        }
+    </script>
+</head>
+
+<body>
+
+<div class="card">
+    <h2>🌦 Weather App</h2>
+
+    <form method="post" onsubmit="showLoader()">
+        <input type="text" name="city" placeholder="Enter city name">
+        <button type="submit">Get Weather</button>
+    </form>
+
+    <div id="loader" class="loader"></div>
+
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+
+    {% if weather %}
+        <div class="result">
+            <h3>{{ city }}</h3>
+            <p><b>Condition:</b> {{ weather }}</p>
+            <p><b>Temperature:</b> {{ temp_c }} °C</p>
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>

@@ -1,20 +1,40 @@
+from flask import Flask, render_template, request
 import requests
 
+app = Flask(__name__)
 
-api_key= 'c1e17822e800e0bf45c4560fc10fb2b2'
+API_KEY = "c1e17822e800e0bf45c4560fc10fb2b2"
 
-user_input=input("Enter city: ")
+@app.route("/", methods=["GET", "POST"])
+def index():
+    weather = None
+    temp_c = None
+    city = None
+    error = None
 
-weather_data = requests.get(
-    f"http://api.openweathermap.org/data/2.5/weather?q={user_input}&units=imperial&APPID={api_key}")
+    if request.method == "POST":
+        city = request.form.get("city", "").strip()
 
-if weather_data.json()['cod']=='404':
-    print('No City Found ')
+        if not city:
+            error = "Please enter a city name"
+        else:
+            url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&units=imperial&appid={API_KEY}"
+            response = requests.get(url).json()
 
-else:
-    weather = weather_data.json() ['weather'] [0] ['main']
-    temp= round(weather_data.json()['main'] ['temp'])
+            if response.get("cod") == "404":
+                error = "City not found"
+            else:
+                weather = response["weather"][0]["main"]
+                temp_f = response["main"]["temp"]
+                temp_c = round((temp_f - 32) * 5 / 9, 2)
 
-    print(f"The Weather in {user_input} is: {weather}")
-    print(f"The Temperature in {user_input} is:{temp}°F")
+    return render_template(
+        "index.html",
+        weather=weather,
+        temp_c=temp_c,
+        city=city,
+        error=error
+    )
 
+if __name__ == "__main__":
+    app.run()

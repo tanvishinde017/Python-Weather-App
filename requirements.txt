@@ -1,3 +1,9 @@
 flask
+<<<<<<< HEAD
 requests
 gunicorn 
+=======
+gunicorn
+python-dotenv
+requests
+>>>>>>> 9ee1ac5 (Initial commit - advanced weather app)

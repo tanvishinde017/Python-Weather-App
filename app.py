@@ -1,40 +1,37 @@
 from flask import Flask, render_template, request
 import requests
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
-
-API_KEY = "c1e17822e800e0bf45c4560fc10fb2b2"
+API_KEY = os.getenv("OPENWEATHER_API_KEY")
 
 @app.route("/", methods=["GET", "POST"])
 def index():
     weather = None
-    temp_c = None
-    city = None
     error = None
 
     if request.method == "POST":
         city = request.form.get("city", "").strip()
-
         if not city:
             error = "Please enter a city name"
         else:
-            url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&units=imperial&appid={API_KEY}"
+            url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&units=metric&appid={API_KEY}"
             response = requests.get(url).json()
 
-            if response.get("cod") == "404":
+            if response.get("cod") != 200:
                 error = "City not found"
             else:
-                weather = response["weather"][0]["main"]
-                temp_f = response["main"]["temp"]
-                temp_c = round((temp_f - 32) * 5 / 9, 2)
+                weather = {
+                    "city": city.title(),
+                    "temp": response["main"]["temp"],
+                    "desc": response["weather"][0]["description"].title(),
+                    "icon": response["weather"][0]["icon"]
+                }
 
-    return render_template(
-        "index.html",
-        weather=weather,
-        temp_c=temp_c,
-        city=city,
-        error=error
-    )
+    return render_template("index.html", weather=weather, error=error)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

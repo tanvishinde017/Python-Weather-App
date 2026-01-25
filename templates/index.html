@@ -2,30 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title> Weather App</title>
+    <title>Weather App</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-<div class="container">
-    <h1>🌤 Weather App</h1>
+
+<div class="card">
+    <h2>🌤 Weather App</h2>
 
     <form method="POST">
-        <input type="text" name="city" placeholder="Enter city name">
-        <button type="submit">Search</button>
+        <input type="text" name="city" placeholder="Enter city">
+        <button>Check</button>
     </form>
 
-    {% if error %}
-        <p class="error">{{ error }}</p>
+    {% if weather %}
+    <div class="result">
+        <h3>{{ weather.city }}</h3>
+        <img src="https://openweathermap.org/img/wn/{{ weather.icon }}@2x.png">
+        <p class="temp">{{ weather.temp }}°C</p>
+        <p>{{ weather.desc }}</p>
+    </div>
     {% endif %}
 
-    {% if weather %}
-        <div class="card">
-            <h2>{{ weather.city }}</h2>
-            <img src="https://openweathermap.org/img/wn/{{ weather.icon }}@2x.png">
-            <h3>{{ weather.temp }}°C</h3>
-            <p>{{ weather.desc }}</p>
-        </div>
+    {% if error %}
+    <p class="error">{{ error }}</p>
     {% endif %}
 </div>
+
 </body>
 </html>

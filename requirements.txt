@@ -1,9 +1,4 @@
-flask
-<<<<<<< HEAD
-requests
-gunicorn 
-=======
-gunicorn
-python-dotenv
-requests
->>>>>>> 9ee1ac5 (Initial commit - advanced weather app)
+flask==2.3.5
+requests==2.31.0
+python-dotenv==1.0.0
+gunicorn==20.1.0

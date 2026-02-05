@@ -38,3 +38,19 @@ This project represents my **first successful API integration**, where I learned
 ### 1️⃣ Clone the Repository
 ```bash
 git clone https://github.com/tanvishinde017/Python-Weather-App.git
+
+
+GitHub → GitHub Actions → Docker → Azure Container Registry → Azure App Service
+
+
+✅ Tech Stack
+
+Python (Flask)
+
+Docker
+
+Azure App Service
+
+Azure Container Registry
+
+GitHub Actions

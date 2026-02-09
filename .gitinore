@@ -1,3 +1,28 @@
-.env
+# Python
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+env/
+venv/
+
+# Environment files
+.env
+.env.*
+
+# Docker
+*.log
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# GitHub Copilot / temp
+*.tmp
+*.bak
+
+# Redis dump
+dump.rdb

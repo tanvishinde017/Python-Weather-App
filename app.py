@@ -17,6 +17,12 @@ redis_client = redis.Redis(
     decode_responses=True
 )
 
+
+# ✅ HEALTH ROUTE HERE
+@app.route("/health")
+def health():
+    return {"status": "healthy"}, 200
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     weather = None

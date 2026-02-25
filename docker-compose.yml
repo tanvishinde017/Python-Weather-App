@@ -1,22 +1,36 @@
+version: "3.9"
 
 services:
-  web:
+  weather-app:
     build: .
-    container_name: flask-weather-app
+    container_name: weather-app
     ports:
-      - "80:80"
-    env_file:
-      - .env
+      - "5000:5000"
+    environment:
+      - OPENWEATHER_API_KEY=c1e17822e800e0bf45c4560fc10fb2b2
     depends_on:
       - redis
 
   redis:
-    image: redis:7-alpine
-    container_name: redis-cache
+    image: redis:alpine
+    container_name: redis
     ports:
       - "6379:6379"
-    volumes:
-      - redis-data:/data
 
-volumes:
-  redis-data:
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    depends_on:
+      - weather-app
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus

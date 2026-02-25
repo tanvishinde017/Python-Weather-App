@@ -1,9 +1,19 @@
-🌦️ Python Weather App — Flask • Docker • Redis • Azure
+🌦️ Python Weather App — Flask • Docker • Redis • Prometheus • Grafana • Azure Ready
 📌 Project Overview
 
-This project is a containerized Python Flask weather application that fetches real-time weather data using the OpenWeatherMap API and demonstrates modern DevOps practices such as Dockerization, multi-container orchestration, caching, and cloud deployment.
+This project is a production-style, containerized Python Flask Weather Application enhanced with:
 
-Instead of building a demo-only project, this application was iteratively improved to reflect real-world DevOps workflows — containerizing an existing app, adding Redis caching, and preparing it for cloud deployment on Azure.
+Redis caching
+
+Prometheus monitoring
+
+Grafana visualization
+
+Docker multi-container orchestration
+
+Azure-ready deployment structure
+
+It demonstrates how a simple Python app evolves into a full DevOps monitoring stack.
 
 🧩 Architecture Overview
 GitHub
@@ -130,3 +140,30 @@ Secrets management using Azure Key Vault
 ✨ Key Takeaway
 
 This project demonstrates how a simple Python application can be evolved into a production-ready, containerized system by applying real-world DevOps principles such as automation, scalability, and reliability.
+
+Developer
+   ↓
+Push Code to GitHub
+   ↓
+Docker Build
+   ↓
+Docker Compose
+   ↓
+-------------------------------------------------
+|                                               |
+|  Flask Weather App  ←→  Redis Cache          |
+|         |                                     |
+|         | exposes /metrics                    |
+-------------------------------------------------
+                ↓
+          Prometheus
+      (scrapes metrics every 15s)
+                ↓
+      Time-Series Database
+                ↓
+            Grafana
+     (visualizes metrics)
+                ↓
+        Monitoring Dashboard
+                ↓
+      Ready for Azure Deployment

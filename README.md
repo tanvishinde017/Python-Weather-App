@@ -94,13 +94,11 @@ cd Python-Weather-App
 2️⃣ Create Environment File
 
 Create a .env file:
-
 OPENWEATHER_API_KEY=your_api_key_here
 REDIS_HOST=redis
 REDIS_PORT=6379
 
 
-⚠️ Do not commit .env to GitHub. Use .env.example instead.
 
 3️⃣ Run Using Docker Compose
 docker compose up --build
@@ -108,7 +106,6 @@ docker compose up --build
 4️⃣ Access the Application
 
 Open browser:
-
 http://localhost
 
 📦 Docker Compose Services

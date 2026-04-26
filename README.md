@@ -1,7 +1,7 @@
 🌦️ Python Weather App — Flask • Docker • Redis • Prometheus • Grafana • Azure Ready
 📌 Project Overview
 
-This project is a production-style, containerized Python Flask Weather Application enhanced with:
+This project is a production-style, containerized Python Flask Weather Application enhanced with :
 
 Redis caching
 
@@ -136,7 +136,7 @@ Secrets management using Azure Key Vault
 
 ✨ Key Takeaway
 
-This project demonstrates how a simple Python application can be evolved into a production-ready, containerized system by applying real-world DevOps principles such as automation, scalability, and reliability.
+This project demonstrates how a simple Python application can be evolved into a production-ready, containerized system by applying real-world DevOps principles such as automation, scalability, and reliability, flexibility.
 
 Developer
    ↓
